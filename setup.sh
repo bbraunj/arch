@@ -1,8 +1,10 @@
 #!/bin/bash
 
-HOSTNAME=hogwarts
-USER=bbraunj
+export HOSTNAME=hogwarts
+export USER=bbraunj
 
+# This script to be run as root after performing an arch-chroot from the installation media.
+# See the appropriate point in the installation guide: https://wiki.archlinux.org/title/Installation_guide#Chroot
 ln -sf /usr/share/zoneinfo/US/Central /etc/localtime
 hwclock --systohc
 sed -i 's/#\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen
