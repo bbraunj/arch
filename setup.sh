@@ -2,6 +2,7 @@
 
 export HOSTNAME=hogwarts
 export USER=bbraunj
+export SERVER_MODE=1
 
 # This script to be run as root after performing an arch-chroot from the installation media.
 # See the appropriate point in the installation guide: https://wiki.archlinux.org/title/Installation_guide#Chroot
@@ -57,6 +58,11 @@ echo "* Adding essential preferences..."
 cat >> /etc/profile.d/aliases.sh << EOF
 alias vi=nvim
 EOF
+
+if [[ $SERVER_MODE == 1 ]]; then
+  # Disable sleep on lid close. Essential for a laptop server.
+  sed -i 's/#\(HandleLidSwitch\)/\1/' /etc/systemd/logind.conf
+fi
 
 su $USER << EOF
 echo "set -o vi" >> /home/$USER/.bashrc
