@@ -50,6 +50,12 @@ cat /home/$USER/.ssh/id_rsa.pub
 echo
 EOF
 
+echo "* Setting up the firewall (firewalld)"
+pacman -S --noconfirm firewalld
+systemctl enable firewalld.service
+systemctl start firewalld.service
+firewall-cmd --add-service=ftp
+
 echo "* Installing several other packages I like :)"
 pacman -S --noconfirm pkginfo neovim python3
 
